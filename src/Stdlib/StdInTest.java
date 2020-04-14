@@ -2,6 +2,7 @@ package Stdlib; /**
  * Test client for StdIn and In. 
  **/
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
@@ -16,7 +17,7 @@ public class StdInTest {
     // make a printable/readable version of an object
     public static Object escape(Object original) {
         if (original instanceof Character) {
-            char u = (char) ((Character) original);
+            char u = (Character) original;
             int idx = "\b\t\n\f\r\"\'\\".indexOf(u);
             if (idx >= 0)
                 return "\\"+"btnfr\"\'\\".charAt(idx);
@@ -67,12 +68,7 @@ public class StdInTest {
     public static void test(String input, Object[][] steps, boolean useStdIn) {
         In in = null;
         if (useStdIn) {
-            try {
-                System.setIn(new ByteArrayInputStream(input.getBytes("UTF-8")));
-            }
-            catch (java.io.UnsupportedEncodingException e) {
-                throw new RuntimeException(e.toString());
-            }
+            System.setIn(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)));
 
             // in order for this to work, you need to change resync to public
             

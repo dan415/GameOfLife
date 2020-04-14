@@ -111,7 +111,7 @@ public class Mundo {
             int mousey = (int) StdDraw.mouseY() < 35 ? (int) StdDraw.mouseY() : 34;
             if (StdDraw.isMousePressed()) {
                 Thread.sleep(150);
-                cuadricula[mousey][mousex].setAlive(true);
+                cuadricula[mousey][mousex].setAlive(!cuadricula[mousey][mousex].isAlive());
                 cuadricula[mousey][mousex].pintar();
                 StdDraw.show();
 
@@ -130,6 +130,7 @@ public class Mundo {
         initGraficos();
         start();
     }
+
 
 
 }
