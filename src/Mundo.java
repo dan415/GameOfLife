@@ -107,8 +107,8 @@ public class Mundo {
 
     private void start() throws InterruptedException {
         while (true) {
-            int mousex = (int) StdDraw.mouseX() < 140 ? (int) StdDraw.mouseX() : 139;
-            int mousey = (int) StdDraw.mouseY() < 35 ? (int) StdDraw.mouseY() : 34;
+            int mousex = (int) StdDraw.mouseX() < cols ? (int) StdDraw.mouseX() : cols-1;
+            int mousey = (int) StdDraw.mouseY() < filas ? (int) StdDraw.mouseY() : filas-1;
             if (StdDraw.isMousePressed()) {
                 Thread.sleep(150);
                 cuadricula[mousey][mousex].setAlive(!cuadricula[mousey][mousex].isAlive());
