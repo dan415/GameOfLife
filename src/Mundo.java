@@ -1,4 +1,4 @@
-import Stdlib.*;
+import Stdlib.StdDraw;
 import static java.awt.event.KeyEvent.*;
 
 public class Mundo {
@@ -50,26 +50,7 @@ public class Mundo {
         for (int i = 0; i < filas; i++) {
             System.arraycopy(nextGen[i], 0, cuadricula[i], 0, cols);
         }
-       // System.out.println(toString());
-    }
-
-    private void firstGeneracion() throws InterruptedException {
-        while(!gameOn){
-            int mousex = (int)StdDraw.mouseX()<140?(int)StdDraw.mouseX():139;
-            int mousey = (int)StdDraw.mouseY()<35?(int)StdDraw.mouseY():34;
-            if(StdDraw.isMousePressed()){
-                Thread.sleep(150);
-                cuadricula[mousey][mousex].setAlive(!cuadricula[mousey][mousex].isAlive());
-                cuadricula[mousey][mousex].pintar();
-                StdDraw.show();
-
-            }
-            else if(StdDraw.isKeyPressed(VK_SPACE)) {
-                gameOn = true;
-            }
-            // System.out.println(toString());
-        }
-
+        // System.out.println(toString());
     }
 
     private void RandomFirstGen(){
@@ -125,17 +106,28 @@ public class Mundo {
 
 
     private void start() throws InterruptedException {
-        while(gameOn) {
-            nextGeneracion();
-            pintar();
-            //Thread.sleep(1000);
-            //System.out.println(toString());
+        while (true) {
+            int mousex = (int) StdDraw.mouseX() < 140 ? (int) StdDraw.mouseX() : 139;
+            int mousey = (int) StdDraw.mouseY() < 35 ? (int) StdDraw.mouseY() : 34;
+            if (StdDraw.isMousePressed()) {
+                Thread.sleep(150);
+                cuadricula[mousey][mousex].setAlive(true);
+                cuadricula[mousey][mousex].pintar();
+                StdDraw.show();
+
+            } else if (StdDraw.isKeyPressed(VK_SPACE)) {
+                Thread.sleep(200);
+                gameOn = !gameOn;
+            }
+            if (gameOn) {
+                nextGeneracion();
+                pintar();
+            }
         }
     }
 
     public void init() throws InterruptedException {
         initGraficos();
-        firstGeneracion();
         start();
     }
 
