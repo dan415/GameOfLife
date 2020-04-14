@@ -53,12 +53,13 @@ public class Mundo {
        // System.out.println(toString());
     }
 
-    private void firstGeneracion(){
+    private void firstGeneracion() throws InterruptedException {
         while(!gameOn){
             int mousex = (int)StdDraw.mouseX()<140?(int)StdDraw.mouseX():139;
             int mousey = (int)StdDraw.mouseY()<35?(int)StdDraw.mouseY():34;
             if(StdDraw.isMousePressed()){
-                cuadricula[mousey][mousex].setAlive(true);
+                Thread.sleep(150);
+                cuadricula[mousey][mousex].setAlive(!cuadricula[mousey][mousex].isAlive());
                 cuadricula[mousey][mousex].pintar();
                 StdDraw.show();
 
@@ -127,7 +128,7 @@ public class Mundo {
         while(gameOn) {
             nextGeneracion();
             pintar();
-            Thread.sleep(1000);
+            //Thread.sleep(1000);
             //System.out.println(toString());
         }
     }
